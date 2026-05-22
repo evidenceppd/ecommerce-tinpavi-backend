@@ -1,0 +1,175 @@
+{
+  "generatedAt": "2026-05-08T11:07:44.689Z",
+  "baselineVersion": "phase-14-01",
+  "slowQueryThresholdMs": 100,
+  "totalQueriesAnalyzed": 12,
+  "rankedQueries": [
+    {
+      "name": "catalog_public_list_default",
+      "endpoint": "GET /products",
+      "avgMs": 3.42,
+      "p95Ms": 4.43,
+      "minMs": 2.71,
+      "maxMs": 4.43,
+      "expectedRows": 20,
+      "expectedQueries": 2,
+      "nPlusOneRisk": false,
+      "optimizationTarget": "indexing"
+    },
+    {
+      "name": "customers_profile_address_list",
+      "endpoint": "GET /me/addresses",
+      "avgMs": 2.62,
+      "p95Ms": 3.07,
+      "minMs": 1.89,
+      "maxMs": 3.07,
+      "expectedRows": 20,
+      "expectedQueries": 1,
+      "nPlusOneRisk": false,
+      "optimizationTarget": "pagination"
+    },
+    {
+      "name": "catalog_admin_with_category_filter",
+      "endpoint": "GET /admin/products?categoryId=*",
+      "avgMs": 2.59,
+      "p95Ms": 3.07,
+      "minMs": 2.1,
+      "maxMs": 3.07,
+      "expectedRows": 20,
+      "expectedQueries": 2,
+      "nPlusOneRisk": false,
+      "optimizationTarget": "indexing"
+    },
+    {
+      "name": "orders_admin_list",
+      "endpoint": "GET /admin/orders",
+      "avgMs": 2.51,
+      "p95Ms": 2.9,
+      "minMs": 2.25,
+      "maxMs": 2.9,
+      "expectedRows": 20,
+      "expectedQueries": 5,
+      "nPlusOneRisk": true,
+      "optimizationTarget": "eager-load"
+    },
+    {
+      "name": "orders_customer_list",
+      "endpoint": "GET /orders",
+      "avgMs": 2.4,
+      "p95Ms": 2.88,
+      "minMs": 1.85,
+      "maxMs": 2.88,
+      "expectedRows": 20,
+      "expectedQueries": 3,
+      "nPlusOneRisk": false,
+      "optimizationTarget": "eager-load"
+    },
+    {
+      "name": "customers_admin_list_with_counts",
+      "endpoint": "GET /admin/customers",
+      "avgMs": 2.26,
+      "p95Ms": 2.46,
+      "minMs": 1.98,
+      "maxMs": 2.46,
+      "expectedRows": 20,
+      "expectedQueries": 5,
+      "nPlusOneRisk": true,
+      "optimizationTarget": "join-rewrite"
+    },
+    {
+      "name": "categories_tree_with_products",
+      "endpoint": "GET /categories",
+      "avgMs": 2.18,
+      "p95Ms": 2.72,
+      "minMs": 1.66,
+      "maxMs": 2.72,
+      "expectedRows": 20,
+      "expectedQueries": 4,
+      "nPlusOneRisk": true,
+      "optimizationTarget": "indexing"
+    },
+    {
+      "name": "reviews_product_feed",
+      "endpoint": "GET /products/:id/reviews",
+      "avgMs": 2.05,
+      "p95Ms": 2.61,
+      "minMs": 1.72,
+      "maxMs": 2.61,
+      "expectedRows": 20,
+      "expectedQueries": 3,
+      "nPlusOneRisk": false,
+      "optimizationTarget": "indexing"
+    },
+    {
+      "name": "catalog_public_list_search",
+      "endpoint": "GET /products?search=serum",
+      "avgMs": 1.57,
+      "p95Ms": 1.91,
+      "minMs": 1.37,
+      "maxMs": 1.91,
+      "expectedRows": 20,
+      "expectedQueries": 2,
+      "nPlusOneRisk": false,
+      "optimizationTarget": "indexing"
+    },
+    {
+      "name": "blogs_public_feed",
+      "endpoint": "GET /blogs",
+      "avgMs": 1.27,
+      "p95Ms": 1.45,
+      "minMs": 1.11,
+      "maxMs": 1.45,
+      "expectedRows": 20,
+      "expectedQueries": 1,
+      "nPlusOneRisk": false,
+      "optimizationTarget": "pagination"
+    },
+    {
+      "name": "seo_redirect_lookup",
+      "endpoint": "GET /redirects",
+      "avgMs": 1.26,
+      "p95Ms": 1.55,
+      "minMs": 0.95,
+      "maxMs": 1.55,
+      "expectedRows": 20,
+      "expectedQueries": 1,
+      "nPlusOneRisk": false,
+      "optimizationTarget": "pagination"
+    },
+    {
+      "name": "analytics_recent_pageviews",
+      "endpoint": "GET /analytics/pageviews",
+      "avgMs": 0.98,
+      "p95Ms": 1.09,
+      "minMs": 0.89,
+      "maxMs": 1.09,
+      "expectedRows": 20,
+      "expectedQueries": 1,
+      "nPlusOneRisk": false,
+      "optimizationTarget": "pagination"
+    }
+  ],
+  "nPlusOneCandidates": [
+    {
+      "endpoint": "GET /admin/orders",
+      "name": "orders_admin_list",
+      "expectedQueries": 5,
+      "evidence": "estimatedQueries=5 for 20 rows",
+      "priority": "P1"
+    },
+    {
+      "endpoint": "GET /admin/customers",
+      "name": "customers_admin_list_with_counts",
+      "expectedQueries": 5,
+      "evidence": "estimatedQueries=5 for 20 rows",
+      "priority": "P1"
+    },
+    {
+      "endpoint": "GET /categories",
+      "name": "categories_tree_with_products",
+      "expectedQueries": 4,
+      "evidence": "estimatedQueries=4 for 20 rows",
+      "priority": "P2"
+    }
+  ]
+}

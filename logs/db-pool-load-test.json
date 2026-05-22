@@ -1,0 +1,567 @@
+{
+  "timestamp": "2026-05-08T11:08:32.723Z",
+  "config": {
+    "concurrency": 30,
+    "iterations": 3,
+    "queryTimeoutMs": 5000,
+    "poolMax": 5,
+    "poolIdleTimeoutMs": 10000,
+    "poolAcquireTimeoutMs": 5000
+  },
+  "totals": {
+    "queries": 90,
+    "successes": 90,
+    "errors": 0,
+    "errorRate": "0.00%"
+  },
+  "latencyMs": {
+    "min": 4,
+    "p50": 16,
+    "p95": 359,
+    "p99": 359,
+    "max": 359
+  },
+  "errors": [],
+  "details": [
+    {
+      "iteration": 1,
+      "worker": 1,
+      "durationMs": 348,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 2,
+      "durationMs": 346,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 3,
+      "durationMs": 347,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 4,
+      "durationMs": 348,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 5,
+      "durationMs": 346,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 6,
+      "durationMs": 351,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 7,
+      "durationMs": 352,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 8,
+      "durationMs": 353,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 9,
+      "durationMs": 350,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 10,
+      "durationMs": 353,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 11,
+      "durationMs": 354,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 12,
+      "durationMs": 354,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 13,
+      "durationMs": 354,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 14,
+      "durationMs": 354,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 15,
+      "durationMs": 355,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 16,
+      "durationMs": 356,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 17,
+      "durationMs": 355,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 18,
+      "durationMs": 356,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 19,
+      "durationMs": 356,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 20,
+      "durationMs": 357,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 21,
+      "durationMs": 357,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 22,
+      "durationMs": 358,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 23,
+      "durationMs": 358,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 24,
+      "durationMs": 357,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 25,
+      "durationMs": 358,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 26,
+      "durationMs": 359,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 27,
+      "durationMs": 359,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 28,
+      "durationMs": 359,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 29,
+      "durationMs": 359,
+      "success": true
+    },
+    {
+      "iteration": 1,
+      "worker": 30,
+      "durationMs": 359,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 1,
+      "durationMs": 5,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 2,
+      "durationMs": 5,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 3,
+      "durationMs": 5,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 4,
+      "durationMs": 6,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 5,
+      "durationMs": 4,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 6,
+      "durationMs": 7,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 7,
+      "durationMs": 7,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 8,
+      "durationMs": 8,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 9,
+      "durationMs": 8,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 10,
+      "durationMs": 9,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 11,
+      "durationMs": 10,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 12,
+      "durationMs": 10,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 13,
+      "durationMs": 10,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 14,
+      "durationMs": 11,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 15,
+      "durationMs": 12,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 16,
+      "durationMs": 11,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 17,
+      "durationMs": 13,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 18,
+      "durationMs": 12,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 19,
+      "durationMs": 13,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 20,
+      "durationMs": 14,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 21,
+      "durationMs": 14,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 22,
+      "durationMs": 14,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 23,
+      "durationMs": 15,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 24,
+      "durationMs": 15,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 25,
+      "durationMs": 16,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 26,
+      "durationMs": 16,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 27,
+      "durationMs": 16,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 28,
+      "durationMs": 17,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 29,
+      "durationMs": 17,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "worker": 30,
+      "durationMs": 17,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 1,
+      "durationMs": 6,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 2,
+      "durationMs": 6,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 3,
+      "durationMs": 6,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 4,
+      "durationMs": 7,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 5,
+      "durationMs": 5,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 6,
+      "durationMs": 8,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 7,
+      "durationMs": 8,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 8,
+      "durationMs": 8,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 9,
+      "durationMs": 9,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 10,
+      "durationMs": 9,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 11,
+      "durationMs": 11,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 12,
+      "durationMs": 11,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 13,
+      "durationMs": 12,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 14,
+      "durationMs": 11,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 15,
+      "durationMs": 12,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 16,
+      "durationMs": 13,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 17,
+      "durationMs": 13,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 18,
+      "durationMs": 14,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 19,
+      "durationMs": 14,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 20,
+      "durationMs": 14,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 21,
+      "durationMs": 15,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 22,
+      "durationMs": 16,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 23,
+      "durationMs": 16,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 24,
+      "durationMs": 17,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 25,
+      "durationMs": 17,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 26,
+      "durationMs": 18,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 27,
+      "durationMs": 18,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 28,
+      "durationMs": 18,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 29,
+      "durationMs": 19,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "worker": 30,
+      "durationMs": 19,
+      "success": true
+    }
+  ]
+}

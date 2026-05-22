@@ -1,0 +1,2 @@
+ALTER TABLE `Blog`
+  ADD COLUMN `tempo_leitura` VARCHAR(191) NULL;

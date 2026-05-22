@@ -1,0 +1,18 @@
+{
+  "generatedAt": "2026-05-08T17:52:24.342Z",
+  "latency": {
+    "p95Ms": 2,
+    "p99Ms": 5
+  },
+  "throughput": {
+    "rps": 300
+  },
+  "resources": {
+    "cpuPct": 25,
+    "memoryPct": 3.38
+  },
+  "sources": [
+    "D:\\src\\laragon\\www\\ecommerce-tinpavi\\backend-tinpavi\\logs\\api-regression-phase19.json",
+    "D:\\src\\laragon\\www\\ecommerce-tinpavi\\backend-tinpavi\\logs\\api-endpoint-profile-phase16.json"
+  ]
+}

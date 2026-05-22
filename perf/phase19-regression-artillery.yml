@@ -1,0 +1,22 @@
+config:
+  target: "http://127.0.0.1:3100"
+  http:
+    pool: 100
+    timeout: 10
+  phases:
+    - duration: 15
+      arrivalRate: 50
+      rampTo: 300
+      name: "warm-up"
+    - duration: 20
+      arrivalRate: 300
+      name: "steady-state"
+  defaults:
+    headers:
+      accept: "application/json"
+      x-request-id: "perf-phase19"
+scenarios:
+  - name: "health endpoint regression"
+    flow:
+      - get:
+          url: "/health"

@@ -1,0 +1,6 @@
+{
+  "api_latency_ms": 100,
+  "cpu_pct": 80,
+  "memory_pct": 85,
+  "min_rps": 250
+}

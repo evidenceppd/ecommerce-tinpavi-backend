@@ -1,0 +1,10 @@
+upstream backend_upstream {
+  least_conn;
+  server backend:3000 max_fails=3 fail_timeout=10s;
+  # server backend_replica_1:3000 max_fails=3 fail_timeout=10s;
+  # server backend_replica_2:3000 max_fails=3 fail_timeout=10s;
+}
+
+upstream frontend_upstream {
+  server frontend:80;
+}

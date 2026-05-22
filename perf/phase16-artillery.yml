@@ -1,0 +1,26 @@
+config:
+  target: "http://127.0.0.1:3100"
+  http:
+    pool: 100       # reuse connections to avoid Windows TCP port exhaustion
+    timeout: 10     # seconds (each request)
+  phases:
+    - duration: 15
+      arrivalRate: 50
+      rampTo: 300
+      name: "warm-up (cache population)"
+    - duration: 30
+      arrivalRate: 300
+      rampTo: 1000
+      name: "ramp to peak"
+    - duration: 30
+      arrivalRate: 1000
+      name: "sustained peak"
+  defaults:
+    headers:
+      accept: "application/json"
+      x-request-id: "perf-phase16"
+scenarios:
+  - name: "public catalog load"
+    flow:
+      - get:
+          url: "/products?page=1&limit=20"

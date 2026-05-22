@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-05-08T12:11:19.986Z",
+  "profiles": [
+    {
+      "endpoint": "/products?page=1&limit=20",
+      "method": "GET",
+      "averageMs": 20.05,
+      "p95Ms": 8.11,
+      "maxMs": 388.31,
+      "cpuUserMicros": 953000,
+      "cpuSystemMicros": 78000,
+      "heapDiffKb": 17715.45,
+      "statusHistogram": {
+        "200": 25
+      }
+    },
+    {
+      "endpoint": "/orders?page=1&limit=20",
+      "method": "GET",
+      "averageMs": 3.17,
+      "p95Ms": 4.77,
+      "maxMs": 5.16,
+      "cpuUserMicros": 219000,
+      "cpuSystemMicros": 0,
+      "heapDiffKb": 4550.58,
+      "statusHistogram": {
+        "401": 25
+      }
+    },
+    {
+      "endpoint": "/orders",
+      "method": "POST",
+      "averageMs": 4.81,
+      "p95Ms": 6.22,
+      "maxMs": 24.99,
+      "cpuUserMicros": 203000,
+      "cpuSystemMicros": 47000,
+      "heapDiffKb": -3593.94,
+      "statusHistogram": {
+        "401": 25
+      }
+    }
+  ]
+}

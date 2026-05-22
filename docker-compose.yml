@@ -1,0 +1,81 @@
+services:
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-ecommerce_tinpavi}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_USER: ${MYSQL_USER:-tinpavi}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-tinpavi}
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$${MYSQL_ROOT_PASSWORD} --silent"]
+      interval: ${MYSQL_HEALTHCHECK_INTERVAL:-10s}
+      timeout: ${MYSQL_HEALTHCHECK_TIMEOUT:-5s}
+      retries: ${MYSQL_HEALTHCHECK_RETRIES:-10}
+      start_period: ${MYSQL_HEALTHCHECK_START_PERIOD:-20s}
+    mem_limit: ${MYSQL_MEMORY_LIMIT:-512m}
+    cpus: ${MYSQL_CPU_LIMIT:-1.0}
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file:
+      - .env.example
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: ${DATABASE_URL:-mysql://root:root@mysql:3306/ecommerce_tinpavi}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1:3000/ready > /dev/null || exit 1"]
+      interval: ${BACKEND_HEALTHCHECK_INTERVAL:-10s}
+      timeout: ${BACKEND_HEALTHCHECK_TIMEOUT:-5s}
+      retries: ${BACKEND_HEALTHCHECK_RETRIES:-10}
+      start_period: ${BACKEND_HEALTHCHECK_START_PERIOD:-20s}
+    stop_grace_period: ${BACKEND_STOP_GRACE_PERIOD:-30s}
+    mem_limit: ${BACKEND_MEMORY_LIMIT:-512m}
+    cpus: ${BACKEND_CPU_LIMIT:-1.0}
+
+  frontend:
+    build:
+      context: ../frontend-tinpavi
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    mem_limit: ${FRONTEND_MEMORY_LIMIT:-256m}
+    cpus: ${FRONTEND_CPU_LIMIT:-0.5}
+
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    ports:
+      - "${NGINX_PORT:-8080}:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      backend:
+        condition: service_healthy
+      frontend:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1/ > /dev/null || exit 1"]
+      interval: ${NGINX_HEALTHCHECK_INTERVAL:-10s}
+      timeout: ${NGINX_HEALTHCHECK_TIMEOUT:-5s}
+      retries: ${NGINX_HEALTHCHECK_RETRIES:-10}
+      start_period: ${NGINX_HEALTHCHECK_START_PERIOD:-10s}
+    mem_limit: ${NGINX_MEMORY_LIMIT:-128m}
+    cpus: ${NGINX_CPU_LIMIT:-0.5}
+
+volumes:
+  mysql_data:

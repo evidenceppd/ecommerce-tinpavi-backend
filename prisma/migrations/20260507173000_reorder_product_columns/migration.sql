@@ -1,0 +1,20 @@
+-- Reorder columns in `product` to match business-required order.
+ALTER TABLE `product`
+  MODIFY COLUMN `id` VARCHAR(191) NOT NULL FIRST,
+  MODIFY COLUMN `category_id` VARCHAR(191) NOT NULL AFTER `id`,
+  MODIFY COLUMN `code` VARCHAR(8) NOT NULL AFTER `category_id`,
+  MODIFY COLUMN `title` VARCHAR(191) NOT NULL AFTER `code`,
+  MODIFY COLUMN `description` TEXT NOT NULL AFTER `title`,
+  MODIFY COLUMN `specifications` JSON NOT NULL AFTER `description`,
+  MODIFY COLUMN `applications` VARCHAR(191) NOT NULL AFTER `specifications`,
+  MODIFY COLUMN `benefits` VARCHAR(191) NOT NULL AFTER `applications`,
+  MODIFY COLUMN `where_use` JSON NOT NULL AFTER `benefits`,
+  MODIFY COLUMN `carousel_image` JSON NOT NULL AFTER `where_use`,
+  MODIFY COLUMN `icons` VARCHAR(191) NOT NULL AFTER `carousel_image`,
+  MODIFY COLUMN `pricing` DOUBLE NOT NULL AFTER `icons`,
+  MODIFY COLUMN `pix_pricing` DOUBLE NOT NULL AFTER `pricing`,
+  MODIFY COLUMN `quantity_stock` INTEGER NOT NULL DEFAULT 0 AFTER `pix_pricing`,
+  MODIFY COLUMN `reviews` INTEGER NOT NULL DEFAULT 0 AFTER `quantity_stock`,
+  MODIFY COLUMN `sales` INTEGER NOT NULL DEFAULT 0 AFTER `reviews`,
+  MODIFY COLUMN `updatedAt` DATETIME(3) NOT NULL AFTER `sales`,
+  MODIFY COLUMN `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) AFTER `updatedAt`;

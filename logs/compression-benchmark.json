@@ -1,0 +1,27 @@
+{
+  "generatedAt": "2026-05-08T11:28:09.689Z",
+  "iterations": 150,
+  "results": [
+    {
+      "level": 1,
+      "averageCompressMs": 0.131,
+      "compressedBytes": 1459,
+      "originalBytes": 113452,
+      "ratioPercent": 1.29
+    },
+    {
+      "level": 6,
+      "averageCompressMs": 0.455,
+      "compressedBytes": 1454,
+      "originalBytes": 113452,
+      "ratioPercent": 1.28
+    },
+    {
+      "level": 9,
+      "averageCompressMs": 0.551,
+      "compressedBytes": 1454,
+      "originalBytes": 113452,
+      "ratioPercent": 1.28
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+ALTER TABLE `Customer`
+  ADD COLUMN `company` VARCHAR(191) NULL,
+  ADD COLUMN `document` VARCHAR(32) NULL;
