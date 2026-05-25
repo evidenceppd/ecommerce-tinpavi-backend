@@ -35,13 +35,13 @@ module.exports = {
       // Apenas NODE_ENV e PORT — todas as outras vars vêm do .env
       env_production: {
         NODE_ENV: 'production',
-        PORT: 3000,
+        // PORT vem do .env
       },
 
       // ── Development ─────────────────────────────────────────────────────────
       env_development: {
         NODE_ENV: 'development',
-        PORT: 3000,
+        // PORT vem do .env
       },
     },
   ],
