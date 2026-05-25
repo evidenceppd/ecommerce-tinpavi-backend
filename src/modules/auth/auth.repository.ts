@@ -15,7 +15,7 @@ export class AuthRepository {
   async findAdminUserByEmail(email: string): Promise<AuthAdminUser | null> {
     const rows = await prisma.$queryRaw<AuthAdminUser[]>`
       SELECT id, email, password, name, role, isActive, firstLogin
-      FROM \`User\`
+      FROM \`user\`
       WHERE email = ${email}
       LIMIT 1
     `;
@@ -25,7 +25,7 @@ export class AuthRepository {
   async findAdminUserById(id: string): Promise<AuthAdminUser | null> {
     const rows = await prisma.$queryRaw<AuthAdminUser[]>`
       SELECT id, email, password, name, role, isActive, firstLogin
-      FROM \`User\`
+      FROM \`user\`
       WHERE id = ${id}
       LIMIT 1
     `;

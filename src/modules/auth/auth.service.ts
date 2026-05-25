@@ -216,7 +216,7 @@ export class AuthService {
 
     if (subjectType === 'USER') {
       await prisma.$executeRaw`
-        DELETE FROM \`UserRefreshToken\`
+        DELETE FROM \`userrefreshtoken\`
         WHERE expiresAt < NOW()
       `;
       return;
@@ -245,7 +245,7 @@ export class AuthService {
 
     if (subjectType === 'USER') {
       await prisma.$executeRaw`
-        INSERT INTO \`UserRefreshToken\` (jti, userId, expiresAt, createdAt)
+        INSERT INTO \`userrefreshtoken\` (jti, userId, expiresAt, createdAt)
         VALUES (${jti}, ${subjectId}, ${expiresAt}, NOW())
       `;
       await this.runRefreshTokenJanitor('USER');
@@ -431,7 +431,7 @@ export class AuthService {
     if (subjectType === 'USER') {
       const storedRows = await prisma.$queryRaw<Array<{ jti: string; userId: string; expiresAt: Date }>>`
         SELECT jti, userId, expiresAt
-        FROM \`UserRefreshToken\`
+        FROM \`userrefreshtoken\`
         WHERE jti = ${payload.jti}
         LIMIT 1
       `;
@@ -470,7 +470,7 @@ export class AuthService {
         requireEnv('JWT_REFRESH_SECRET'),
       ) as JwtRefreshPayload;
       if ((payload.t ?? 'CUSTOMER') === 'USER') {
-        await prisma.$executeRaw`DELETE FROM \`UserRefreshToken\` WHERE jti = ${payload.jti}`;
+        await prisma.$executeRaw`DELETE FROM \`userrefreshtoken\` WHERE jti = ${payload.jti}`;
       } else {
         await prisma.refreshToken.deleteMany({ where: { jti: payload.jti } });
       }

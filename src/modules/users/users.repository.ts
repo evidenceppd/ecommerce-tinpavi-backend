@@ -15,7 +15,7 @@ export class UsersRepository {
   async listAll(): Promise<AdminUserRecord[]> {
     const rows = await prisma.$queryRaw<AdminUserRecord[]>`
       SELECT id, email, name, role, isActive, firstLogin, createdAt, updatedAt
-      FROM \`User\`
+      FROM \`user\`
       ORDER BY createdAt DESC
     `;
     return rows;
@@ -24,7 +24,7 @@ export class UsersRepository {
   async findById(id: string): Promise<AdminUserRecord | null> {
     const rows = await prisma.$queryRaw<AdminUserRecord[]>`
       SELECT id, email, name, role, isActive, firstLogin, createdAt, updatedAt
-      FROM \`User\`
+      FROM \`user\`
       WHERE id = ${id}
       LIMIT 1
     `;
@@ -34,7 +34,7 @@ export class UsersRepository {
   async findByEmail(email: string): Promise<AdminUserRecord | null> {
     const rows = await prisma.$queryRaw<AdminUserRecord[]>`
       SELECT id, email, name, role, isActive, firstLogin, createdAt, updatedAt
-      FROM \`User\`
+      FROM \`user\`
       WHERE email = ${email}
       LIMIT 1
     `;
@@ -51,7 +51,7 @@ export class UsersRepository {
     password: string;
   }): Promise<void> {
     await prisma.$executeRaw`
-      INSERT INTO \`User\` (id, email, password, name, role, isActive, firstLogin, createdAt, updatedAt)
+      INSERT INTO \`user\` (id, email, password, name, role, isActive, firstLogin, createdAt, updatedAt)
       VALUES (${data.id}, ${data.email}, ${data.password}, ${data.name}, ${data.role}, ${data.isActive}, ${data.firstLogin}, NOW(), NOW())
     `;
   }
@@ -68,7 +68,7 @@ export class UsersRepository {
     },
   ): Promise<void> {
     await prisma.$executeRaw`
-      UPDATE \`User\`
+      UPDATE \`user\`
       SET
         email = COALESCE(${fields.email ?? null}, email),
         name = COALESCE(${fields.name ?? null}, name),
@@ -82,6 +82,6 @@ export class UsersRepository {
   }
 
   async deleteById(id: string): Promise<void> {
-    await prisma.$executeRaw`DELETE FROM \`User\` WHERE id = ${id}`;
+    await prisma.$executeRaw`DELETE FROM \`user\` WHERE id = ${id}`;
   }
 }
