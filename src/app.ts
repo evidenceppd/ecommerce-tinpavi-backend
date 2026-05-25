@@ -241,7 +241,7 @@ app.get('/docs', (_req: Request, res: Response) => {
 app.use(csrfGuard);
 app.use(redirectMiddleware);
 app.post(
-  '/uploads/image',
+  '/api/v1/uploads/image',
   authenticate,
   productImageUpload.single('image'),
   validateUploadedProductImage,
@@ -280,23 +280,23 @@ app.use(
     },
   }),
 );
-app.use('/analytics', analyticsRouter);
-app.use('/blogs', blogsRouter);
+app.use('/api/v1/analytics', analyticsRouter);
+app.use('/api/v1/blogs', blogsRouter);
 
-app.get('/contato', async (_req: Request, res: Response) => {
+app.get('/api/v1/contato', async (_req: Request, res: Response) => {
   res.status(200).json(ok(await readContactInfo()));
 });
 
-app.put('/contato', authenticate, async (req: Request, res: Response) => {
+app.put('/api/v1/contato', authenticate, async (req: Request, res: Response) => {
   const saved = await writeContactInfo(req.body as Record<string, unknown>);
   res.status(200).json(ok(saved));
 });
 
-app.get('/hero', async (_req: Request, res: Response) => {
+app.get('/api/v1/hero', async (_req: Request, res: Response) => {
   res.status(200).json(ok(await readHeroBanner()));
 });
 
-app.put('/hero', authenticate, async (req: Request, res: Response) => {
+app.put('/api/v1/hero', authenticate, async (req: Request, res: Response) => {
   const saved = await writeHeroBanner(req.body as Record<string, unknown>);
   res.status(200).json(ok(saved));
 });
@@ -325,11 +325,11 @@ async function writeBlogBanner(payload: Record<string, unknown>) {
   return data;
 }
 
-app.get('/blog-banner', async (_req: Request, res: Response) => {
+app.get('/api/v1/blog-banner', async (_req: Request, res: Response) => {
   res.status(200).json(ok(await readBlogBanner()));
 });
 
-app.put('/blog-banner', authenticate, async (req: Request, res: Response) => {
+app.put('/api/v1/blog-banner', authenticate, async (req: Request, res: Response) => {
   const saved = await writeBlogBanner(req.body as Record<string, unknown>);
   res.status(200).json(ok(saved));
 });
@@ -365,28 +365,28 @@ app.get('/ready', async (_req: Request, res: Response) => {
   );
 });
 
-app.use('/auth', authRateLimiter, authRouter);
-app.use('/users', userRateLimiter, authenticate, usersRouter);
-app.use('/me/cart', userRateLimiter, authenticate, cartRouter);
-app.use('/me/orders', userRateLimiter, authenticate, orderPaymentRouter);
-app.use('/me/shipping', userRateLimiter, authenticate, shippingRouter);
-app.use("/me", userRateLimiter, authenticate, customersRouter);
-app.use("/admin/customers", adminRateLimiter, authenticate, adminCustomersRouter);
+app.use('/api/v1/auth', authRateLimiter, authRouter);
+app.use('/api/v1/users', userRateLimiter, authenticate, usersRouter);
+app.use('/api/v1/me/cart', userRateLimiter, authenticate, cartRouter);
+app.use('/api/v1/me/orders', userRateLimiter, authenticate, orderPaymentRouter);
+app.use('/api/v1/me/shipping', userRateLimiter, authenticate, shippingRouter);
+app.use('/api/v1/me', userRateLimiter, authenticate, customersRouter);
+app.use('/api/v1/admin/customers', adminRateLimiter, authenticate, adminCustomersRouter);
 
-app.use('/products', publicReadRateLimiter, catalogRouter);
-app.use('/admin/products', adminRateLimiter, authenticate, adminCatalogRouter);
-app.use('/categories', publicReadRateLimiter, categoriesRouter);
-app.use('/admin/categories', adminRateLimiter, authenticate, adminCategoriesRouter);
+app.use('/api/v1/products', publicReadRateLimiter, catalogRouter);
+app.use('/api/v1/admin/products', adminRateLimiter, authenticate, adminCatalogRouter);
+app.use('/api/v1/categories', publicReadRateLimiter, categoriesRouter);
+app.use('/api/v1/admin/categories', adminRateLimiter, authenticate, adminCategoriesRouter);
 
-app.use('/orders', userRateLimiter, authenticate, ordersRouter);
-app.use('/admin/orders', adminRateLimiter, authenticate, adminOrdersRouter);
-app.use('/admin/coupons', adminRateLimiter, authenticate, couponsAdminRouter);
-app.use('/products/:productId/reviews', reviewsRouter); // auth handled per-route
-app.use('/admin/reviews', adminRateLimiter, authenticate, adminReviewsRouter);
+app.use('/api/v1/orders', userRateLimiter, authenticate, ordersRouter);
+app.use('/api/v1/admin/orders', adminRateLimiter, authenticate, adminOrdersRouter);
+app.use('/api/v1/admin/coupons', adminRateLimiter, authenticate, couponsAdminRouter);
+app.use('/api/v1/products/:productId/reviews', reviewsRouter); // auth handled per-route
+app.use('/api/v1/admin/reviews', adminRateLimiter, authenticate, adminReviewsRouter);
 
 app.use(seoRouter);
-app.use('/admin/redirects', adminRateLimiter, authenticate, adminRedirectsRouter);
-app.use('/admin', adminRateLimiter, authenticate, adminOperationsRouter);
+app.use('/api/v1/admin/redirects', adminRateLimiter, authenticate, adminRedirectsRouter);
+app.use('/api/v1/admin', adminRateLimiter, authenticate, adminOperationsRouter);
 
 // Payment routes
 app.use('/webhooks', paymentWebhookRouter);
