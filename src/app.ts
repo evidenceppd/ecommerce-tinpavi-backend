@@ -12,7 +12,7 @@ import { runReadinessCheck } from './shared/infra/readiness';
 import { errorHandlerMiddleware } from "./shared/middleware/error-handler";
 import { notFoundMiddleware } from "./shared/middleware/not-found";
 import { authenticate } from "./shared/middleware/authenticate";
-import { securityMiddleware, corsMiddleware, httpsRedirectMiddleware } from './shared/middleware/security';
+import { securityMiddleware, httpsRedirectMiddleware } from './shared/middleware/security';
 import { csrfGuard } from './shared/middleware/csrf';
 import {
   adminRateLimiter,
@@ -42,6 +42,13 @@ import { getDbProfileContext, runWithDbProfileContext } from './shared/infra/db-
 import { productImageUpload, validateUploadedProductImage } from './shared/middleware/upload';
 
 applyPerfBenchmarkEnvDefaults();
+
+if (process.env['NODE_ENV'] === 'production') {
+  const corsOrigin = process.env['CORS_ORIGIN'];
+  if (!corsOrigin || corsOrigin.trim().length === 0) {
+    throw new Error('Missing required env var: CORS_ORIGIN in production');
+  }
+}
 
 const app = express();
 const jsonBodyLimit = process.env['JSON_BODY_LIMIT'] ?? '256kb';
@@ -118,7 +125,32 @@ async function writeHeroBanner(payload: Record<string, unknown>) {
 app.set('trust proxy', process.env['TRUST_PROXY'] === 'true' ? 1 : false);
 app.use(httpsRedirectMiddleware);
 app.use(securityMiddleware);
-app.use(corsMiddleware);
+app.use((req, res, next) => {
+  const envOrigins = (process.env['CORS_ORIGIN'] ?? '')
+    .split(',')
+    .map((o) => o.trim())
+    .filter(Boolean);
+  const allowedOrigins = envOrigins.length > 0
+    ? envOrigins
+    : ['http://localhost:5173', 'http://192.168.100.39:5173'];
+
+  const requestOrigin = req.headers.origin;
+  if (requestOrigin && allowedOrigins.includes(requestOrigin)) {
+    res.setHeader('Access-Control-Allow-Origin', requestOrigin);
+    res.setHeader('Vary', 'Origin');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+  }
+
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,POST,PUT,PATCH,DELETE,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-Request-ID,X-CSRF-Token');
+    res.setHeader('Access-Control-Max-Age', '86400');
+    res.status(204).end();
+    return;
+  }
+
+  next();
+});
 app.use(compression(getCompressionOptions()) as express.RequestHandler); // cast required: @types/compression targets Express 4
 
 app.use((req, res, next) => {
@@ -185,6 +217,7 @@ app.use('/webhooks/payment', (req, res, next) => {
     next();
   } catch {
     res.status(400).json(fail('INVALID_JSON', 'Invalid JSON payload'));
+    return;
   }
 });
 
