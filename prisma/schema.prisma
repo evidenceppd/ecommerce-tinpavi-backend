@@ -33,6 +33,8 @@ model User {
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
   userRefreshTokens UserRefreshToken[]
+
+  @@map("user")
 }
 
 model UserRefreshToken {
@@ -41,6 +43,8 @@ model UserRefreshToken {
   expiresAt  DateTime
   createdAt  DateTime @default(now())
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("userrefreshtoken")
 }
 
 model Customer {
@@ -62,6 +66,7 @@ model Customer {
   cart           Cart?
 
   @@index([createdAt], map: "idx_customer_created_at")
+  @@map("customer")
 }
 
 model Address {
@@ -81,6 +86,8 @@ model Address {
   updatedAt  DateTime @updatedAt
 
   customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@map("address")
 }
 
 model RefreshToken {
@@ -90,6 +97,8 @@ model RefreshToken {
   createdAt  DateTime @default(now())
 
   customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@map("refreshtoken")
 }
 
 model Product {
@@ -134,6 +143,7 @@ model Product {
   @@index([category_id], map: "idx_product_category_id")
   @@index([title], map: "idx_product_title")
   @@index([createdAt], map: "idx_product_created_at")
+  @@map("product")
 }
 
 model ProductCategory {
@@ -147,6 +157,7 @@ model ProductCategory {
   updatedAt  DateTime @updatedAt
 
   @@index([title], map: "idx_product_category_title")
+  @@map("productcategory")
 }
 
 model ProductCategoryLink {
@@ -159,6 +170,7 @@ model ProductCategoryLink {
   @@id([productId, categoryId])
   @@index([productId], map: "idx_product_category_link_product")
   @@index([categoryId], map: "idx_product_category_link_category")
+  @@map("productcategorylink")
 }
 
 // ─── Cart ────────────────────────────────────────────────────────────────────
@@ -170,6 +182,8 @@ model Cart {
   updatedAt  DateTime   @updatedAt
   customer   Customer   @relation(fields: [customerId], references: [id], onDelete: Cascade)
   items      CartItem[]
+
+  @@map("cart")
 }
 
 model CartItem {
@@ -185,6 +199,7 @@ model CartItem {
 
   @@unique([cartId, productId])
   @@index([cartId], map: "idx_cart_item_cart_id")
+  @@map("cartitem")
 }
 
 // ─── Phase 4: Orders and Coupons ─────────────────────────────────────────────
@@ -217,6 +232,8 @@ model Coupon {
   createdAt          DateTime   @default(now())
   updatedAt          DateTime   @updatedAt
   orders             Order[]
+
+  @@map("coupon")
 }
 
 model Order {
@@ -251,6 +268,7 @@ model Order {
   @@index([customerId, status, createdAt], map: "idx_order_customer_status_created")
   @@index([customerId, createdAt], map: "idx_order_customer_created")
   @@index([status, createdAt], map: "idx_order_status_created")
+  @@map("order")
 }
 
 model OrderItem {
@@ -264,6 +282,8 @@ model OrderItem {
   totalPrice  Decimal @db.Decimal(10, 2)
   order       Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   product     Product @relation(fields: [productId], references: [id])
+
+  @@map("orderitem")
 }
 
 model OrderStatusHistory {
@@ -273,6 +293,8 @@ model OrderStatusHistory {
   changedAt DateTime    @default(now())
   changedBy String?
   order     Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("orderstatushistory")
 }
 
 // ─── Phase 6: Payment Abstraction ────────────────────────────────────────────
@@ -312,6 +334,7 @@ model Review {
   @@unique([customerId, productId])
   @@index([productId, status, createdAt], map: "idx_review_product_status_created")
   @@index([customerId, createdAt], map: "idx_review_customer_created")
+  @@map("review")
 }
 
 // ─── Phase 8: Technical SEO ───────────────────────────────────────────────
@@ -323,6 +346,8 @@ model Redirect {
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("redirect")
 }
 
 model PaymentWebhookEvent {
@@ -331,6 +356,8 @@ model PaymentWebhookEvent {
   externalId  String
   status      String
   processedAt DateTime @default(now())
+
+  @@map("paymentwebhookevent")
 }
 
 // ─── Analytics ────────────────────────────────────────────────────────────
@@ -346,6 +373,7 @@ model PageView {
 
   @@index([createdAt])
   @@index([page])
+  @@map("pageview")
 }
 
 // ─── Blog / Noticias ──────────────────────────────────────────────────────
@@ -368,4 +396,5 @@ model Blog {
 
   @@index([publicado])
   @@index([createdAt])
+  @@map("blog")
 }
