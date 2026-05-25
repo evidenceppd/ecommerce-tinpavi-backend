@@ -35,14 +35,17 @@ export const csrfGuard: RequestHandler = (req, res, next) => {
   // Non-browser agents (server-to-server) don't send Origin; allow them through
   if (!origin && !referer) return next();
 
-  const allowedOrigin = (process.env['CORS_ORIGIN'] ?? '').replace(/\/$/, '');
+  const allowedOrigins = (process.env['CORS_ORIGIN'] ?? '')
+    .split(',')
+    .map((o) => o.trim().replace(/\/$/, ''))
+    .filter(Boolean);
 
-  // Wildcard CORS_ORIGIN means no origin restriction is configured — allow
-  if (allowedOrigin === '*' || allowedOrigin === '') return next();
+  // Wildcard or empty means no origin restriction is configured — allow
+  if (allowedOrigins.length === 0 || allowedOrigins.includes('*')) return next();
 
   const source = origin ?? (referer ? new URL(referer).origin : '');
 
-  if (source !== allowedOrigin) {
+  if (!allowedOrigins.includes(source)) {
     res.status(403).json({
       success: false,
       data: null,
